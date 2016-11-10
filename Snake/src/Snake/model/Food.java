@@ -3,7 +3,10 @@ package Snake.model;
 import java.util.Random;
 
 /**
- * Created by Jeroen on 7/11/2016.
+ * @author Jeroen Claessens
+ * @version 1.0
+ *
+ * Data for the food & method to renew the object with new coordinates
  */
 public final class Food {
     private byte size;
@@ -15,6 +18,9 @@ public final class Food {
         newFood();
     }
 
+    /**
+     * Generates new random coordinates and store it in this object
+     */
     public void newFood() {
         byte cols = (byte)(600 / size);
         byte rows = (byte)(600 / size);
@@ -23,7 +29,7 @@ public final class Food {
         this.x = (short)(rnd.nextInt(cols) * size);
         this.y = (short)(rnd.nextInt(rows) * size);
 
-        System.out.println(x + "," + y);
+        //System.out.println(x + "," + y);
     }
 
     public short getX() {

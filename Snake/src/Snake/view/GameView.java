@@ -14,9 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Jeroen on 7/11/2016.
+ * @author Jeroen Claessens
+ * @version 1.0
+ *
+ * View class contains all graphics and draw methods
  */
-public class GameView extends BorderPane {
+public final class GameView extends BorderPane {
+    //style constants
     private final String backgroundStyle = "-fx-background-color: #1e1a9b;";
     private final String canvasStyle = "-fx-background-color: #000;";
     private final String snakeStyle = "-fx-fill: #00cc22;";
@@ -37,15 +41,21 @@ public class GameView extends BorderPane {
         layoutNodes();
     }
 
+    /**
+     * Initialise nodes with their default states
+     */
     private void initNodes() {
         this.topPane = new HBox();
         this.canvas = new Pane();
         snake = new ArrayList<>();
         status = new Label();
-        instruction = new Label("Press <esc> to pause!");
+        instruction = new Label();
         score = new Label("Score: 0");
     }
 
+    /**
+     * Layout & Style nodes
+     */
     private void layoutNodes() {
         this.setStyle(backgroundStyle);
         this.setMinSize(700,700);
@@ -80,14 +90,19 @@ public class GameView extends BorderPane {
         this.canvas.setMinSize(600,600);
         this.canvas.setMaxSize(600,600);
 
-        this.setAlignment(canvas, Pos.CENTER);
+        setAlignment(canvas, Pos.CENTER);
 
         //add nodes
         this.setTop(topPane);
         this.setCenter(canvas);
     }
 
-    //setters
+    /**
+     * draws the snake
+     * method called from presenter
+     * @param snake which part of the snake needs to be drawn
+     * @param add true if food is eaten and the snake extends his length
+     */
     void setSnake(Rectangle snake, boolean add) {
         //remove if no food is eaten
         if (!add && this.snake.size() > 0) {
@@ -105,6 +120,11 @@ public class GameView extends BorderPane {
 
     }
 
+    /**
+     * draws the food
+     * method called from presenter
+     * @param food contains coordinates where the food needs to be drawn
+     */
     void setFood(Rectangle food) {
         canvas.getChildren().remove(this.food);
         this.food = food;
@@ -112,6 +132,7 @@ public class GameView extends BorderPane {
         canvas.getChildren().add(0, food);
     }
 
+    //region setters
     Label getStatus() {
         return status;
     }
@@ -123,5 +144,5 @@ public class GameView extends BorderPane {
     Label getScore() {
         return score;
     }
-
+    //endregion
 }

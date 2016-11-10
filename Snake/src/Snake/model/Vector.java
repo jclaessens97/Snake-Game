@@ -1,13 +1,17 @@
 package Snake.model;
 
 /**
- * Created by Jeroen on 7/11/2016.
+ * @author Jeroen Claessens
+ * @version 1.0
+ *
+ * Contains an object to store x- and y-coordinate in one object
+ * ?? (maybe make this an innerclass of snake) ??
  */
 public final class Vector {
     private short x;
     private short y;
 
-    public Vector(short x, short y) {
+    Vector(short x, short y) {
         this.x = x;
         this.y = y;
     }

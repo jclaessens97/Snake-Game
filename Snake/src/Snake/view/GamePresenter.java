@@ -15,9 +15,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * Created by Jeroen on 7/11/2016.
+ * @author Jeroen Claessens
+ * @version 1.0
+ *
+ * Connection class between the model and the view
  */
-public class GamePresenter {
+public final class GamePresenter {
     private Game model;
     private GameView view;
 
@@ -27,10 +30,15 @@ public class GamePresenter {
         updateSnake(model.getSnake().getX(), model.getSnake().getY());
         updateFood();
         autoUpdateView();
+        pause(); //start in paused state
     }
 
+    /**
+     * Updates the snake movement
+     * @param x used to set the new x-coordinate of the snakehead
+     * @param y used to set the new y-coordinate of the snakehead
+     */
     private int length = 1;
-
     private void updateSnake(short x, short y) {
         Rectangle snake = new Rectangle(model.SIZE, model.SIZE);
         snake.setX(x);
@@ -45,6 +53,9 @@ public class GamePresenter {
         }
     }
 
+    /**
+     * If a new food is generated, replace that food
+     */
     private void updateFood() {
         Rectangle food = new Rectangle(model.SIZE, model.SIZE);
         food.setX(model.getFood().getX());
@@ -52,15 +63,21 @@ public class GamePresenter {
         view.setFood(food);
     }
 
-    private Timeline tl;
 
+    /**
+     * Sets timeline for autmatic snake movement
+     */
+    private Timeline tl;
     private void autoUpdateView() {
-        tl = new Timeline(model.REFRESHRATE);
+        tl = new Timeline();
         tl.setCycleCount(Animation.INDEFINITE);
         tl.getKeyFrames().add(new KeyFrame(Duration.seconds(model.DELAY), e -> updateView()));
         tl.play();
     }
 
+    /**
+     * Puts the information of the model to the view class
+     */
     private void updateView() {
         model.getSnake().update();
 
@@ -73,7 +90,7 @@ public class GamePresenter {
         if (model.getSnake().eatFood()) {
             model.getFood().newFood();
             updateFood();
-            System.out.println("Got food!");
+            //System.out.println("Got food!");
             model.getSnake().addTail(model.getSnake().getX(), model.getSnake().getY());
         }
 
@@ -82,6 +99,10 @@ public class GamePresenter {
         }
     }
 
+    /**
+     * pause/unpause the game
+     * the game starts in a paused condition
+     */
     private void pause() {
         if (view.getStatus().getText().equals("PAUSED")) {
             view.getStatus().setText("");
@@ -94,12 +115,18 @@ public class GamePresenter {
         }
     }
 
+    /**
+     * stops the animation and sets gameover text
+     */
     private void gameOver() {
         tl.stop();
         view.getStatus().setText("GAME OVER!");
         view.getInstruction().setText("Press <enter> to try again!");
     }
 
+    /**
+     * starts a new game(window) called after gameover
+     */
     private void restart() {
         Stage primaryStage = new Stage();
         Game model = new Game();
@@ -119,9 +146,12 @@ public class GamePresenter {
         currentstage.close();
     }
 
+    /**
+     * KeyEventHandler
+     * @param e contains the key that is pressed
+     */
     public void keyPressed(KeyEvent e) {
-        KeyCode keyCode = e.getCode();
-        switch (keyCode) {
+    switch (e.getCode()) {
             case UP: model.getSnake().setDir(0,-1);break;
             case DOWN: model.getSnake().setDir(0,1);break;
             case LEFT: model.getSnake().setDir(-1,0);break;

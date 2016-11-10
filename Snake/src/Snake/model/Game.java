@@ -1,12 +1,14 @@
 package Snake.model;
 
 /**
- * Created by Jeroen on 7/11/2016.
+ * @author Jeroen Claessens
+ * @version 1.0
+ *
+ * Model class to gain access to snake & food from the presenter with only 1 model
  */
 public final class Game {
-    public final byte REFRESHRATE = 60;
-    public final double DELAY = 0.15;
-    public final byte SIZE = 15;
+    public final float DELAY = 0.15f; //time between snake-move animations
+    public final byte SIZE = 15; //blocksize
 
     private Snake snake;
     private Food food;
@@ -23,5 +25,4 @@ public final class Game {
     public Food getFood() {
         return food;
     }
-
 }

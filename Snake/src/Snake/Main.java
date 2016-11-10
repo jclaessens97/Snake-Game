@@ -8,9 +8,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Created by Jeroen on 7/11/2016.
+ * @author Jeroen Claessens
+ * @version 1.0
+ *
+ * Main class of Snake
  */
-public class Main extends Application {
+public final class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Game model = new Game();
