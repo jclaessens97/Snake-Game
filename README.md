@@ -3,6 +3,7 @@
 ## What?
 
 One of my first Java projects I've made is this one: an old fashioned snake game.
+It's far from perfect and I've improved a lot since then, but I drop it here just to look back at it every now and then :)
 
 ## License
 MIT License
