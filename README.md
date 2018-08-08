@@ -1,16 +1,8 @@
-# Simple Games
+# Snake
 
 ## What?
 
-A small project I've started to make a couple of small games into one Java project.
-
-## Including
-* Snake
-
-## Contributing
-
-This project is for my own, but I share it in case someone wants to look at my code.
-If someone sees anything that can be improved, feel free to change it!
+One of my first Java projects I've made is this one: an old fashioned snake game.
 
 ## License
 MIT License
